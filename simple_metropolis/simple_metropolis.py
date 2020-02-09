@@ -3,7 +3,7 @@ import numba
 import pandas as pd
 
 
-@njit
+@numba.njit
 def _adjust_sigma(acc_rate, sigma):
     """
     Tune sigma in proposal distribution.
@@ -167,7 +167,7 @@ def mh_sample(
                 n += 1
                 n_tune_steps += 1
                 n_accept += accept
-            sigma = adjust_sigma(n_accept / tune_interval, sigma)
+            sigma = _adjust_sigma(n_accept / tune_interval, sigma)
             n_accept = 0
             n_tune_steps = 0
 
@@ -185,7 +185,7 @@ def mh_sample(
                 n_accept += accept
                 n_accept_total += accept
                 n += 1
-            sigma = adjust_sigma(n_accept / tune_interval, sigma)
+            sigma = _adjust_sigma(n_accept / tune_interval, sigma)
             n_accept = 0
             n_tune_steps = 0
 
