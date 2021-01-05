@@ -7,13 +7,13 @@ import pandas as pd
 def _adjust_sigma(acc_rate, sigma):
     """
     Tune sigma in proposal distribution.
-    
+
     Parameters
     ----------
     acc_rate : float
         The acceptance rate.
     sigma : ndarray
-        Array of standard deviations for Gaussian proposal 
+        Array of standard deviations for Gaussian proposal
         distribution.
 
     Returns
@@ -77,7 +77,7 @@ def mh_sample(
         are sequential integers.
     return_acceptance_rate : bool, default False
         If True, also return acceptance rate.
-    
+
     Returns
     -------
     output : DataFrame
@@ -86,7 +86,7 @@ def mh_sample(
         at each sample.
     """
 
-    if type(logtarget) == numba.targets.registry.CPUDispatcher:
+    if type(logtarget) == numba.core.registry.CPUDispatcher:
         njit = numba.njit
     else:
         njit = _dummy_jit
